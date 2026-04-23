@@ -1,0 +1,46 @@
+﻿  tests.cpp
+C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(125,14): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "tests.cpp")
+      C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(125,14):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\tests.cpp(13,16):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "DHeap<int>"
+          C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(122,8):
+          во время компиляции функции-члена класс шаблон "DHeap<int> DHeap<int>::heapify(std::vector<int,std::allocator<int>> &,int)"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\tests.cpp(93,29):
+              см. первую ссылку на "DHeap<int>::heapify" в "Dheap_heapify_Test::TestBody"
+  
+C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(42,19): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "tests.cpp")
+      C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(42,19):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(40,6):
+          во время компиляции функции-члена класс шаблон "int DHeap<int>::Get_size(void)"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\tests.cpp(107,9):
+              см. первую ссылку на "DHeap<int>::Get_size" в "Dheap_rehash_Test::TestBody"
+  
+C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(27,23): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "tests.cpp")
+      C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(27,23):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(24,2):
+          во время компиляции функции-члена класс шаблон "DHeap<int>::DHeap(std::vector<int,std::allocator<int>> &,int)"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(124,13):
+              см. первую ссылку на "DHeap<int>::DHeap" в "DHeap<int>::heapify"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\tests.cpp(93,29):
+              см. первую ссылку на "DHeap<int>::heapify" в "Dheap_heapify_Test::TestBody"
+  
+C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(72,34): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "tests.cpp")
+      C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(72,34):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(61,7):
+          во время компиляции функции-члена класс шаблон "int DHeap<int>::Child_index(int)"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(87,23):
+              см. первую ссылку на "DHeap<int>::Child_index" в "DHeap<int>::Dive"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\Heap.h(127,13):
+              см. первую ссылку на "DHeap<int>::Dive" в "DHeap<int>::heapify"
+              C:\Users\Женя\source\repos\mp2-lab6-heap\mp2-lab6-heap\tests.cpp(93,29):
+              см. первую ссылку на "DHeap<int>::heapify" в "Dheap_heapify_Test::TestBody"
+  
+  mp2-lab6-heap.vcxproj -> C:\Users\Женя\source\repos\mp2-lab6-heap\x64\Debug\mp2-lab6-heap.exe
