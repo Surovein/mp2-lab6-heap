@@ -106,3 +106,12 @@ TEST(Dheap, delete_root)
         heap.Insert(3); 
         EXPECT_EQ(heap.Get_size(), 4);
     }
+    TEST(Dheap, max)
+    {
+        DHeap<int> heap;
+       // std::vector<int> vec = { 2,1 };
+        heap.Insert(1);
+        heap.Insert(2);
+        heap.Insert(3);
+        EXPECT_EQ(heap.Getmax(), 3);
+    }
