@@ -12,7 +12,7 @@ TEST(Dheap, can_create)
 {
     DHeap<int> heap;
 }
-TEST(Dheap, insert)
+TEST(Dheap, insert_max)
 {
     DHeap<int> heap;    
     std::vector<int> vec = { 10,9,8,7,6,5 };
@@ -22,6 +22,22 @@ TEST(Dheap, insert)
     heap.Insert(7);
     heap.Insert(6);
     heap.Insert(5);
+    for (int i = 0; i < 6; i++)
+    {
+        EXPECT_EQ(heap.Get_element(i), vec[i]);
+    }
+
+}
+TEST(Dheap, insert_min)
+{
+    DHeap<int> heap;
+    std::vector<int> vec = { 5,6,7,8,9,10 };
+    heap.Insert(5);
+    heap.Insert(6);
+    heap.Insert(7);
+    heap.Insert(8);
+    heap.Insert(9);
+    heap.Insert(10);
     for (int i = 0; i < 6; i++)
     {
         EXPECT_EQ(heap.Get_element(i), vec[i]);
