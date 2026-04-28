@@ -1,13 +1,16 @@
 #pragma once
 #pragma once
 #include <vector>
-template <typename tval>
+template <typename tval, class Comparator = std::greater<tval>>
 class DHeap
 {
 protected:
 	std::vector<tval> data;
 	int d;
 	int last_free = 0;
+
+	Comparator c;
+
 public:
 	DHeap()
 	{
@@ -73,7 +76,10 @@ public:
 		}
 		for (int k = index * d + 2; k <= last_child_index; k++)
 		{
-			if (data[k] > max_child)
+			if (c( data[k], max_child))
+				
+				
+//				data[k] > max_child)
 			{
 				max_child = data[k];
 				index_max = k;
@@ -89,8 +95,9 @@ public:
 		{
 			return;
 		}
-		while (data[i] < data[index_max_child])
+		while (c(data[index_max_child], data[i]))    //(data[i] < data[index_max_child])
 		{
+			//bool check = ( c(data[index_max_child], data[i]) == (data[i] < data[index_max_child]));
 			tval tmp = data[i];
 			data[i] = data[index_max_child];
 			data[index_max_child] = tmp;
@@ -109,8 +116,10 @@ public:
 			return;
 		}
 		int i = (index - 1) / d;
-		while (i >= 0 && data[index] > data[i])
+		while (i >= 0 && c(data[index], data[i]))
+	//	while (i >= 0 && data[index] > data[i])
 		{
+			//bool check = c(data[i], data[index]);
 			tval tmp = data[i];
 			data[i] = data[index];
 			data[index] = tmp;
