@@ -8,7 +8,7 @@ protected:
 	std::vector<tval> data;
 	int d;
 	int last_free = 0;
-
+	std::vector<int> index_in_heap;
 	Comparator c;
 
 public:
@@ -113,7 +113,7 @@ public:
 		}
 		while (c(data[index_max_child], data[i]))    //(data[i] < data[index_max_child])
 		{
-			//bool check = ( c(data[index_max_child], data[i]) == (data[i] < data[index_max_child]));
+			//bool  = ( c(data[index_max_child], data[i]) == (data[i] < data[index_max_child]));
 			tval tmp = data[i];
 			data[i] = data[index_max_child];
 			data[index_max_child] = tmp;
@@ -135,7 +135,7 @@ public:
 		while (i >= 0 && c(data[index], data[i]))
 	//	while (i >= 0 && data[index] > data[i])
 		{
-			//bool check = c(data[i], data[index]);
+			//bool  = c(data[i], data[index]);
 			tval tmp = data[i];
 			data[i] = data[index];
 			data[index] = tmp;
@@ -154,7 +154,7 @@ public:
 		while (i >= 0 && c(data[index], data[i]))
 			//	while (i >= 0 && data[index] > data[i])
 		{
-			//bool check = c(data[i], data[index]);
+			//bool  = c(data[i], data[index]);
 			tval tmp = data[i];
 			data[i] = data[index];
 			data[index] = tmp;
@@ -197,6 +197,11 @@ public:
 	{
 		return data[index];
 	}
+
+	void DecreaseKey(int index, tval newp)
+	{
+	}
+
 	~DHeap()
 	{
 

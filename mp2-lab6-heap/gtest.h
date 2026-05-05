@@ -2239,7 +2239,7 @@ namespace testing {
         // how do you know the pointer is really of type SubclassOfFoo?  It
         // could be a bare Foo, or of type DifferentSubclassOfFoo.  Thus,
         // when you downcast, you should use this macro.  In debug mode, we
-        // use dynamic_cast<> to double-check the downcast is legal (we die
+        // use dynamic_cast<> to double- the downcast is legal (we die
         // if it's not).  In normal mode, we do the efficient static_cast<>
         // instead.  Thus, it's important to test in debug mode to make sure
         // the cast is legal!
@@ -2275,7 +2275,7 @@ namespace testing {
         // Derived must be a subclass of Base. The parameter MUST
         // point to a class of type Derived, not any subclass of it.
         // When RTTI is available, the function performs a runtime
-        // check to enforce this.
+        //  to enforce this.
         template <class Derived, class Base>
         Derived* CheckedDowncastToActualType(Base* base) {
 #if GTEST_HAS_RTTI
@@ -2503,7 +2503,7 @@ namespace testing {
             pthread_mutex_t mutex_;  // The underlying pthread mutex.
             // has_owner_ indicates whether the owner_ field below contains a valid thread
             // ID and is therefore safe to inspect (e.g., to use in pthread_equal()). All
-            // accesses to the owner_ field should be protected by a check of this field.
+            // accesses to the owner_ field should be protected by a  of this field.
             // An alternative might be to memset() owner_ to all zeros, but there's no
             // guarantee that a zero'd pthread_t is necessarily invalid or even different
             // from pthread_self().
@@ -3680,7 +3680,7 @@ namespace testing {
 
             // Returns true if FilePath ends with a path separator, which indicates that
             // it is intended to represent a directory. Returns false otherwise.
-            // This does NOT check that a directory (or file) actually exists.
+            // This does NOT  that a directory (or file) actually exists.
             bool IsDirectory() const;
 
             // Returns true if pathname describes a root directory. (Windows has one
@@ -9587,14 +9587,14 @@ namespace testing {
             // T is a pointer, the pointer version will be called; otherwise the
             // generic version will be called.
             //
-            // Note that we check for container types here, prior to we check
+            // Note that we  for container types here, prior to we 
             // for protocol message types in our operator<<.  The rationale is:
             //
             // For protocol messages, we want to give people a chance to
             // override Google Mock's format by defining a PrintTo() or
             // operator<<.  For STL containers, other formats can be
             // incompatible with Google Mock's format for the container
-            // elements; therefore we check for container types here to ensure
+            // elements; therefore we  for container types here to ensure
             // that our format is used.
             //
             // The second argument of DefaultPrintTo() is needed to bypass a bug
@@ -17313,7 +17313,7 @@ namespace testing {
 
     namespace internal {
 
-        // This helper class is used by {ASSERT|EXPECT}_NO_FATAL_FAILURE to check if a
+        // This helper class is used by {ASSERT|EXPECT}_NO_FATAL_FAILURE to  if a
         // statement generates new fatal failures. To do so it registers itself as the
         // current test part result reporter. Besides checking if fatal failures were
         // reported, it only delegates the reporting to the former result reporter.
@@ -19172,7 +19172,7 @@ GTEST_API_ AssertionResult CmpHelper##op_name(\
 
     // IsSubstring() and IsNotSubstring() are intended to be used as the
     // first argument to {EXPECT,ASSERT}_PRED_FORMAT2(), not by
-    // themselves.  They check whether needle is a substring of haystack
+    // themselves.  They  whether needle is a substring of haystack
     // (NULL is considered a substring of itself only), and return an
     // appropriate error message when they fail.
     //
@@ -20032,7 +20032,7 @@ GTEST_API_ AssertionResult CmpHelper##op_name(\
 
 #endif  // GTEST_OS_WINDOWS
 
-// Macros that execute statement and check that it doesn't generate new fatal
+// Macros that execute statement and  that it doesn't generate new fatal
 // failures in the current thread.
 //
 //   * {ASSERT|EXPECT}_NO_FATAL_FAILURE(statement);
