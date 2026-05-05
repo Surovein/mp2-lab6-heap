@@ -1,7 +1,7 @@
 #pragma once
 #pragma once
 #include <vector>
-template <typename tval, class Comparator = std::greater<tval>>
+template <typename tval, class Comparator = std::less<tval>> // less // greater
 class DHeap
 {
 protected:
@@ -39,6 +39,22 @@ public:
 		data[last_free] = val;
 		surfacing(last_free);
 		last_free++;
+	}
+	int Insert_ret(tval val)
+	{
+		if (last_free == data.size())
+		{
+			Rehash();
+		}
+		data[last_free] = val;
+		int x = surfacing_ret(last_free);
+		if (x == -1)
+		{
+			last_free++;
+			return 0;
+		}
+		last_free++;
+		return x;
 	}
 	int Get_size()
 	{
@@ -127,6 +143,25 @@ public:
 			i = (i - 1) / d;
 		}
 
+	}
+	int surfacing_ret(int index)
+	{
+		if (index == 0)
+		{
+			return -1;
+		}
+		int i = (index - 1) / d;
+		while (i >= 0 && c(data[index], data[i]))
+			//	while (i >= 0 && data[index] > data[i])
+		{
+			//bool check = c(data[i], data[index]);
+			tval tmp = data[i];
+			data[i] = data[index];
+			data[index] = tmp;
+			index = i;
+			i = (i - 1) / d;
+		}
+		return index;
 	}
 	DHeap heapify(std::vector<tval>& mas, int n)
 	{

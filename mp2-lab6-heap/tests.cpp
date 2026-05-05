@@ -1,7 +1,9 @@
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
+
 #include"gtest.h"
 #include"Heap.h"
 #include<vector>
-//#include "gtest.h"
+#include"Dijkstra's algorithm.h"
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
@@ -44,7 +46,7 @@ TEST(Dheap, insert_min)
     }
 
 }
-TEST(Dheap, surfacing)
+TEST(Dheap, surfacing_max)
 {
     DHeap<int> heap;
     std::vector<int> vec = { 20,9,10,7,6,5,8 };
@@ -60,23 +62,52 @@ TEST(Dheap, surfacing)
         EXPECT_EQ(heap.Get_element(i), vec[i]);
     }
 }
-TEST(Dheap, delete)
+TEST(Dheap, surfacing_min)
 {
     DHeap<int> heap;
-    std::vector<int> vec = { 10,9,5,7,6 };
+    std::vector<int> vec = {7,8,9,10};
+    heap.Insert(10);
+    heap.Insert(9);
+    heap.Insert(8);
+    heap.Insert(7);
+    for (int i = 0; i < 4; i++)
+    {
+        EXPECT_EQ(heap.Get_element(i), vec[i]);
+    }
+}
+TEST(Dheap, delete_max)
+{
+    DHeap<int> heap;
+    std::vector<int> vec = { 10,9,5,7,6,4 };
     heap.Insert(10);
     heap.Insert(9);
     heap.Insert(8);
     heap.Insert(7);
     heap.Insert(6);
     heap.Insert(5);
+    heap.Insert(4);
     heap.Delete(2);
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
+    {
+       // std::cout << heap.Get_element(i) << std::endl;
+        EXPECT_EQ(heap.Get_element(i), vec[i]);
+    }
+}
+TEST(Dheap, delete_min)
+{
+    DHeap<int> heap;
+    std::vector<int> vec = { 4,7,6};
+    heap.Insert(4);
+    heap.Insert(5);
+    heap.Insert(6);
+    heap.Insert(7);
+    heap.Delete(1);
+    for (int i = 0; i < 3; i++)
     {
         EXPECT_EQ(heap.Get_element(i), vec[i]);
     }
 }
-TEST(Dheap, dive)
+TEST(Dheap, dive_max)
 {
     DHeap<int> heap;
     std::vector<int> vec = { 3,1,2 };
@@ -88,7 +119,19 @@ TEST(Dheap, dive)
         EXPECT_EQ(heap.Get_element(i), vec[i]);
     }
 }
-TEST(Dheap, delete_root)
+TEST(Dheap, dive_min)
+{
+    DHeap<int> heap;
+    std::vector<int> vec = { 1,3,2 };
+    heap.Insert(3);
+    heap.Insert(1);
+    heap.Insert(2);
+    for (int i = 0; i < 3; i++)
+    {
+        EXPECT_EQ(heap.Get_element(i), vec[i]);
+    }
+}
+TEST(Dheap, delete_root_max)
 {
     DHeap<int> heap;
     std::vector<int> vec = { 2,1 };
@@ -101,10 +144,22 @@ TEST(Dheap, delete_root)
         EXPECT_EQ(heap.Get_element(i), vec[i]);
     }
 }
-    TEST(Dheap, heapify)
+    TEST(Dheap, heapify_max)
     {
         std::vector<int> vec = { 2,1,3,4 };
         std::vector<int> res = { 4,2,3,1};
+        DHeap<int> heap;
+        DHeap<int> new_heap = heap.heapify(vec, 2);
+        for (int i = 0; i < 4; i++)
+        {
+            //std::cout << new_heap.Get_element(i) << std::endl;
+            EXPECT_EQ(new_heap.Get_element(i), res[i]);
+        }
+    }
+    TEST(Dheap, heapify_min)
+    {
+        std::vector<int> vec = { 2,1,3,4 };
+        std::vector<int> res = { 1,2,3,4 };
         DHeap<int> heap;
         DHeap<int> new_heap = heap.heapify(vec, 2);
         for (int i = 0; i < 4; i++)
@@ -130,4 +185,32 @@ TEST(Dheap, delete_root)
         heap.Insert(2);
         heap.Insert(3);
         EXPECT_EQ(heap.Getmax(), 3);
+    }
+    TEST(Dheap, min)
+    {
+        DHeap<int> heap;
+        // std::vector<int> vec = { 2,1 };
+        heap.Insert(3);
+        heap.Insert(2);
+        heap.Insert(1);
+        EXPECT_EQ(heap.Getmax(), 1);
+    }
+    TEST(Dijkstra, create)
+    {
+        Dijkstra a();
+    }
+    TEST(Dijkstra, check)
+    {
+        int c = 4;
+        int start = 0;
+        int finish = 3;
+        std::vector<std::vector<Dijkstra::edge>> matrix = 
+        {
+            { Dijkstra::edge(0, 0), Dijkstra::edge(1, 1), Dijkstra::edge(1, 2),Dijkstra::edge(0, 0) },
+            { Dijkstra::edge(1, 1), Dijkstra::edge(0, 0), Dijkstra::edge(0, 0),Dijkstra::edge(1, 1) },
+            { Dijkstra::edge(1, 2), Dijkstra::edge(0, 0), Dijkstra::edge(0, 0),Dijkstra::edge(1, 1) },
+            {Dijkstra::edge(0, 0), Dijkstra::edge(1, 1), Dijkstra::edge(1, 1),Dijkstra::edge(0, 0) },
+        };
+        Dijkstra a(c,start,finish,matrix);
+        EXPECT_EQ(a.Algorithm(), 2);
     }
