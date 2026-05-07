@@ -175,7 +175,7 @@ TEST(Dheap, delete_root_max)
         heap.Insert(1);
         heap.Insert(2);
         heap.Insert(3); 
-        EXPECT_EQ(heap.Get_size(), 4);
+        EXPECT_EQ(heap.Get_data_size(), 4);
     }
     TEST(Dheap, max)
     {
@@ -195,22 +195,60 @@ TEST(Dheap, delete_root_max)
         heap.Insert(1);
         EXPECT_EQ(heap.Getmax(), 1);
     }
-    //TEST(Dijkstra, create)
-    //{
-    //    Dijkstra a();
-    //}
-    //TEST(Dijkstra, )
-    //{
-    //    int c = 4;
-    //    int start = 0;
-    //    int finish = 3;
-    //    std::vector<std::vector<Dijkstra::edge>> matrix = 
-    //    {
-    //        { Dijkstra::edge(0, 0), Dijkstra::edge(1, 1), Dijkstra::edge(1, 2),Dijkstra::edge(0, 0) },
-    //        { Dijkstra::edge(1, 1), Dijkstra::edge(0, 0), Dijkstra::edge(0, 0),Dijkstra::edge(1, 1) },
-    //        { Dijkstra::edge(1, 2), Dijkstra::edge(0, 0), Dijkstra::edge(0, 0),Dijkstra::edge(1, 1) },
-    //        {Dijkstra::edge(0, 0), Dijkstra::edge(1, 1), Dijkstra::edge(1, 1),Dijkstra::edge(0, 0) },
-    //    };
-    //    Dijkstra a(c,start,finish,matrix);
-    //    EXPECT_EQ(a.Algorithm(), 2);
-    //}
+    TEST(Dheap, DecreaseKey)
+    {
+        DHeap<int, std::greater<int> > heap;
+        std::vector<int> vec = { 100, 3 ,1 };
+        int index1 = heap.Insert_ret(3);
+        int index2 = heap.Insert_ret(2);
+        int index3 =  heap.Insert_ret(1);
+        heap.DecreaseKey(index2, 100);
+        EXPECT_EQ(heap.element(index1), vec[1]);
+        EXPECT_EQ(heap.element(index2), vec[0]);
+        EXPECT_EQ(heap.element(index3), vec[2]);
+    }
+
+    TEST(Dijkstra, create)
+    {
+        Dijkstra a();
+    }
+    TEST(Dijkstra, alg1 )
+    {
+        int c = 4;
+        int start = 0;
+        std::vector<std::vector<Dijkstra::edge>> matrix = 
+        {
+            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 2) },
+            { Dijkstra::edge(0, 1),Dijkstra::edge(3, 1) },
+            { Dijkstra::edge(0, 2),Dijkstra::edge(3, 1) },
+            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 1) }
+        };
+        Dijkstra a(c);
+        std::vector<Dijkstra::dist> res = a.Algorithm(start, matrix);
+        std::vector<int> ans = { 0,1,2,2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
+            std::cout << res[i].distance << std::endl;
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
+    TEST(Dijkstra, alg2)
+    {
+        int c = 4;
+        int start = 0;
+        std::vector<std::vector<Dijkstra::edge>> matrix =
+        {
+            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 2), Dijkstra::edge(3, 5) },
+            { Dijkstra::edge(0, 1),Dijkstra::edge(3, 1) },
+            { Dijkstra::edge(0, 2),Dijkstra::edge(3, 1) },
+            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 1), Dijkstra::edge(0, 5) }
+        };
+        Dijkstra a(c);
+        std::vector<Dijkstra::dist> res = a.Algorithm(start, matrix);
+        std::vector<int> ans = { 0,1,2,2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
+            std::cout << res[i].distance << std::endl;
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
