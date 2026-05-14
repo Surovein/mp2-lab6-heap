@@ -5,6 +5,7 @@ template <typename tval, class Comparator = std::less<tval>> // less // greater
 class DHeap
 {
 public:
+	using handle_type = int;
 	struct Node
 	{
 		int number_in_mas = -1; // индекс в index_in_heap
@@ -85,7 +86,7 @@ public:
 		last_free++;
 		return tmp_count ;
 	}
-	int Get_size()
+	int Get_size() const
 	{
 		return last_free;
 	}
@@ -244,6 +245,19 @@ public:
 		Delete(0);
 		return max;
 	}
+
+
+	tval GetTop() const  // только посмотреть
+	{
+		if (last_free == 0)
+		{
+			throw 1;
+		}
+		return data[0].value;
+	}
+
+
+
 	tval Get_element(int index)
 	{
 		return data[index].value;

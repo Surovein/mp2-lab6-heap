@@ -4,7 +4,33 @@
 #include"Heap.h"
 #include<vector>
 #include"Dijkstra's algorithm.h"
+#include <boost/version.hpp>
+#include <boost/heap/binomial_heap.hpp>
+#include <boost/heap/fibonacci_heap.hpp>
+#include <boost/heap/pairing_heap.hpp>
+#include <boost/heap/skew_heap.hpp>
+#include <boost/heap/d_ary_heap.hpp>
+#include <chrono>
 
+//int main() {
+//    // Проверка версии
+//    std::cout << "Boost version: "
+//        << BOOST_VERSION / 100000 << "."
+//        << (BOOST_VERSION / 100) % 1000 << "."
+//        << BOOST_VERSION % 100 << std::endl;
+//
+//    // Проверка Boost.Heap
+//    boost::heap::binomial_heap<int> heap;
+//    heap.push(10);
+//    heap.push(5);
+//    heap.push(15);
+//
+//    std::cout << "Top element: " << heap.top() << std::endl;
+//    heap.pop();
+//    std::cout << "After pop, top: " << heap.top() << std::endl;
+//
+//    return 0;
+//}
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
@@ -210,45 +236,252 @@ TEST(Dheap, delete_root_max)
 
     TEST(Dijkstra, create)
     {
-        Dijkstra a();
+        Dijkstra<DHeapBoostWrapper<Node>> a(4);
     }
-    TEST(Dijkstra, alg1 )
+
+
+//#include <chrono>  // Библиотека для работы со временем
+//
+//    auto start = std::chrono::steady_clock::now();  // Запоминаем время ДО выполнения
+//
+//    // ВАШ КОД (то, что хотим измерить)
+//    Dijkstra<DHeapBoostWrapper<Node>> d(1000);      // Создаём объект Дейкстры
+//    auto res = d.Algorithm(0, graph);               // Запускаем алгоритм
+//
+//    auto end = std::chrono::steady_clock::now();    // Запоминаем время ПОСЛЕ выполнения
+//
+//    // Вычисляем разницу в миллисекундах
+//    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+//
+//    std::cout << "Время: " << ms << " ms" << std::endl;  // Выводим результат
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    TEST(Dijkstra, alg1)
     {
         int c = 4;
-        int start = 0;
-        std::vector<std::vector<Dijkstra::edge>> matrix = 
+        int start_ = 0;
+        std::vector<std::vector<Dijkstra<DHeapBoostWrapper<Node>>::edge>> matrix =
         {
-            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 2) },
-            { Dijkstra::edge(0, 1),Dijkstra::edge(3, 1) },
-            { Dijkstra::edge(0, 2),Dijkstra::edge(3, 1) },
-            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 1) }
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(1, 1), Dijkstra<DHeapBoostWrapper<Node>>::edge(2, 2) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(0, 1),Dijkstra<DHeapBoostWrapper<Node>>::edge(3, 1) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(0, 2),Dijkstra<DHeapBoostWrapper<Node>>::edge(3, 1) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(1, 1), Dijkstra<DHeapBoostWrapper<Node>>::edge(2, 1) }
         };
-        Dijkstra a(c);
-        std::vector<Dijkstra::dist> res = a.Algorithm(start, matrix);
+        Dijkstra<DHeapBoostWrapper<Node>> a(c);
+
+        auto start = std::chrono::steady_clock::now();
+
+        std::vector<Dijkstra<DHeapBoostWrapper<Node>>::dist> res = a.Algorithm(start_, matrix);
+       
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
         std::vector<int> ans = { 0,1,2,2 };
         for (int i = 0; i < ans.size(); i++)
         {
-            std::cout << res[i].distance << std::endl;
+           // std::cout << res[i].distance << std::endl;
             EXPECT_EQ(res[i].distance, ans[i]);
         }
     }
+
     TEST(Dijkstra, alg2)
     {
         int c = 4;
-        int start = 0;
-        std::vector<std::vector<Dijkstra::edge>> matrix =
+        int start_ = 0;
+        std::vector<std::vector<Dijkstra<DHeapBoostWrapper<Node>>::edge>> matrix =
         {
-            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 2), Dijkstra::edge(3, 5) },
-            { Dijkstra::edge(0, 1),Dijkstra::edge(3, 1) },
-            { Dijkstra::edge(0, 2),Dijkstra::edge(3, 1) },
-            { Dijkstra::edge(1, 1), Dijkstra::edge(2, 1), Dijkstra::edge(0, 5) }
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(1, 1), Dijkstra<DHeapBoostWrapper<Node>>::edge(2, 2), Dijkstra<DHeapBoostWrapper<Node>>::edge(3, 5) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(0, 1),Dijkstra<DHeapBoostWrapper<Node>>::edge(3, 1) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(0, 2),Dijkstra<DHeapBoostWrapper<Node>>::edge(3, 1) },
+            { Dijkstra<DHeapBoostWrapper<Node>>::edge(1, 1), Dijkstra<DHeapBoostWrapper<Node>>::edge(2, 1), Dijkstra<DHeapBoostWrapper<Node>>::edge(0, 5) }
         };
-        Dijkstra a(c);
-        std::vector<Dijkstra::dist> res = a.Algorithm(start, matrix);
+        Dijkstra<DHeapBoostWrapper<Node>> a(c);
+
+        auto start = std::chrono::steady_clock::now();
+
+
+        std::vector<Dijkstra<DHeapBoostWrapper<Node>>::dist> res = a.Algorithm(start_, matrix);
+
+
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
+
         std::vector<int> ans = { 0,1,2,2 };
         for (int i = 0; i < ans.size(); i++)
         {
-            std::cout << res[i].distance << std::endl;
+           // std::cout << res[i].distance << std::endl;
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
+    TEST(Dijkstra, pairing_heap)
+    {
+        // Правильная настройка pairing_heap
+        using PairingHeap = boost::heap::pairing_heap<Node,
+            boost::heap::mutable_<true>,           // ? обязательно для update
+            boost::heap::compare<std::greater<Node>>>;
+
+        using DijkstraType = Dijkstra<PairingHeap>;
+
+        int c = 4;
+        int start_ = 0;
+
+        std::vector<std::vector<DijkstraType::edge>> matrix =
+        {
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 2) },
+            { DijkstraType::edge(0, 1), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(0, 2), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 1) }
+        };
+
+        DijkstraType a(c);
+
+        auto start = std::chrono::steady_clock::now();
+
+        auto res = a.Algorithm(start_, matrix);
+
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
+
+
+
+        std::vector<int> ans = { 0, 1, 2, 2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
+
+    TEST(Dijkstra, fibonacci_heap)
+    {
+        // Настройка fibonacci_heap как mutable
+        using FibHeap = boost::heap::fibonacci_heap<Node,
+            boost::heap::mutable_<true>,           // ? обязательно для update
+            boost::heap::compare<std::greater<Node>>>;
+
+        using DijkstraType = Dijkstra<FibHeap>;
+
+        int c = 4;
+        int start_ = 0;
+
+        std::vector<std::vector<DijkstraType::edge>> matrix =
+        {
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 2) },
+            { DijkstraType::edge(0, 1), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(0, 2), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 1) }
+        };
+
+        DijkstraType a(c);
+
+
+        auto start = std::chrono::steady_clock::now();
+
+
+        auto res = a.Algorithm(start_, matrix);
+
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
+
+
+
+        std::vector<int> ans = { 0, 1, 2, 2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
+    TEST(Dijkstra, skew_heap_fixed)
+    {
+        using SkewHeap = boost::heap::skew_heap<Node,
+            boost::heap::mutable_<true>,
+            boost::heap::compare<std::greater<Node>>>;
+
+        using DijkstraType = Dijkstra<SkewHeap>;
+
+        int c = 4;
+        int start_ = 0;
+
+        std::vector<std::vector<DijkstraType::edge>> matrix =
+        {
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 2) },
+            { DijkstraType::edge(0, 1), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(0, 2), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 1) }
+        };
+
+        DijkstraType a(c);
+
+
+        auto start = std::chrono::steady_clock::now();
+
+
+        auto res = a.Algorithm(start_, matrix);
+
+
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
+
+
+
+        std::vector<int> ans = { 0, 1, 2, 2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
+            EXPECT_EQ(res[i].distance, ans[i]);
+        }
+    }
+    TEST(Dijkstra, d_ary_heap)
+    {
+        // Настройка d_ary_heap
+        using DAryHeap = boost::heap::d_ary_heap<Node,
+            boost::heap::arity<4>,                    // количество детей (4)
+            boost::heap::mutable_<true>,              // нужно для update()
+            boost::heap::compare<std::greater<Node>>>; // min-heap
+
+        using DijkstraType = Dijkstra<DAryHeap>;
+
+        int c = 4;
+        int start_ = 0;
+
+        std::vector<std::vector<DijkstraType::edge>> matrix =
+        {
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 2) },
+            { DijkstraType::edge(0, 1), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(0, 2), DijkstraType::edge(3, 1) },
+            { DijkstraType::edge(1, 1), DijkstraType::edge(2, 1) }
+        };
+
+        DijkstraType a(c);
+
+        auto start = std::chrono::steady_clock::now();
+
+
+        auto res = a.Algorithm(start_, matrix);
+
+        auto end = std::chrono::steady_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+        std::cout << "time: " << ms << " microseconds" << std::endl;
+
+        std::vector<int> ans = { 0, 1, 2, 2 };
+        for (int i = 0; i < ans.size(); i++)
+        {
             EXPECT_EQ(res[i].distance, ans[i]);
         }
     }
